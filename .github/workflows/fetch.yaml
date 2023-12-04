@@ -29,4 +29,3 @@ jobs:
     - uses: stefanzweifel/git-auto-commit-action@v5
       with:
         commit_message: "feat: ${{ steps.date.outputs.time }}"
-        file_pattern: '*.json'
