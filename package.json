@@ -1,0 +1,45 @@
+{
+  "name": "@gurbaninow/hukamnama-archive",
+  "version": "1.0.0",
+  "description": "Fetch and store the latest Mukhvaak from Sri Darbar Sahib, Sri Amritsar.",
+  "type": "module",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "fetch": "node index.js",
+    "lint": "eslint .",
+    "precommit": "npm run lint",
+    "prepare": "husky install",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gurbaninow/hukamnama-archive.git"
+  },
+  "author": "Sarabveer Singh <me@sarabveer.me>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gurbaninow/hukamnama-archive/issues"
+  },
+  "homepage": "https://github.com/gurbaninow/hukamnama-archive#readme",
+  "dependencies": {
+    "@gurbaninow/database": "^5.0.0-beta",
+    "date-fns": "^2.30.0",
+    "date-fns-tz": "^2.0.0",
+    "fast-xml-parser": "^4.3.2",
+    "gurmukhi-utils": "^3.2.2",
+    "jsdom": "^23.0.1"
+  },
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.23.3",
+    "@commitlint/cli": "^18.4.3",
+    "@commitlint/config-conventional": "^18.4.3",
+    "eslint": "^8.49.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-jest": "^27.4.0",
+    "eslint-plugin-require-sort": "^1.3.0",
+    "husky": "^8.0.3"
+  }
+}
