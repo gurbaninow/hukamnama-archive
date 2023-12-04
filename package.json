@@ -25,6 +25,7 @@
   "homepage": "https://github.com/gurbaninow/hukamnama-archive#readme",
   "dependencies": {
     "@gurbaninow/database": "^5.0.0-beta",
+    "app-root-path": "^3.1.0",
     "date-fns": "^2.30.0",
     "date-fns-tz": "^2.0.0",
     "fast-xml-parser": "^4.3.2",
