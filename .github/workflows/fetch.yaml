@@ -22,6 +22,11 @@ jobs:
     - run: npm ci
     - run: npm run fetch
       name: Fetch
+    - id: date
+      uses: Kaven-Universe/github-action-current-date-time@v1
+      with:
+        format: "YYYY-MM-DD"
     - uses: stefanzweifel/git-auto-commit-action@v5
-      with: 
+      with:
+        commit_message: "feat: ${{ steps.date.outputs.time }}"
         file_pattern: '*.json'
