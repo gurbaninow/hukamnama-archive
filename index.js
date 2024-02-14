@@ -1,16 +1,17 @@
 /* eslint-disable no-console */
 import { knex } from '@gurbaninow/database'
+import { utcToZonedTime } from 'date-fns-tz'
 import getSikhnet from './lib/sikhnet.js'
 // import getSGPC from './lib/sgpc.js'
 import writeFile from './lib/writeFile.js'
 
 let hukam = false
-const today = new Date().toISOString().split( 'T' )[ 0 ]
+const today = utcToZonedTime( new Date(), 'Asia/Kolkata' ).toISOString().split( 'T' )[ 0 ]
 
 console.info( 'Fetching Hukamnama from Sikhnet...' )
 try {
   const sikhnet = await getSikhnet()
-  const date = sikhnet.date.toISOString().split( 'T' )[ 0 ]
+  const date = utcToZonedTime( sikhnet.date, 'Asia/Kolkata' ).toISOString().split( 'T' )[ 0 ]
   if ( date !== today ) {
     throw new Error( 'Sikhnet - Hukamnama not available for this day.' )
   }
