@@ -2,7 +2,7 @@
 import { knex } from '@gurbaninow/database'
 import { toZonedTime } from 'date-fns-tz'
 import getSikhnet from './lib/sikhnet.js'
-// import getSGPC from './lib/sgpc.js'
+import getSGPC from './lib/sgpc.js'
 import writeFile from './lib/writeFile.js'
 
 let hukam = false
@@ -24,12 +24,11 @@ try {
 }
 
 // If Hukamnama is not available from SikhNet, try SGPC
-/*
 if ( !hukam ) {
   console.info( 'Fetching Hukamnama from SGPC (fallback)...' )
   try {
     const sgpc = await getSGPC()
-    const date = sgpc.date.toISOString().split( 'T' )[ 0 ]
+    const date = toZonedTime( sgpc.date, 'Asia/Kolkata' ).toISOString().split( 'T' )[ 0 ]
     if ( date !== today ) {
       throw new Error( 'SGPC - Hukamnama not available for this day.' )
     }
@@ -41,7 +40,6 @@ if ( !hukam ) {
     console.error( error )
   }
 }
-*/
 
 // Throw error if Hukamnama is not available
 if ( !hukam ) {
@@ -53,4 +51,5 @@ console.info( 'Writing Hukamnama to file...' )
 writeFile( hukam )
 
 // Close database connection
+console.info( 'Exiting...' )
 knex.destroy()
