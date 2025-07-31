@@ -17,15 +17,17 @@ jobs:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
       with:
+        node-version: 'lts/*'
         registry-url: https://npm.pkg.github.com
         scope: '@gurbaninow'
     - run: npm ci
     - run: npm run fetch
-      name: Fetch
+      name: Fetch Hukamnama
     - id: date
       uses: Kaven-Universe/github-action-current-date-time@v1
       with:
         format: "YYYY-MM-DD"
-    - uses: stefanzweifel/git-auto-commit-action@v5
+    - uses: stefanzweifel/git-auto-commit-action@v6
       with:
         commit_message: "feat: ${{ steps.date.outputs.time }}"
+        commit_author: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
