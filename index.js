@@ -8,32 +8,32 @@ import writeFile from './lib/writeFile.js'
 let hukam = false
 const today = toZonedTime( new Date(), 'Asia/Kolkata' ).toISOString().split( 'T' )[ 0 ]
 
-console.info( 'Fetching Hukamnama from Sikhnet...' )
+console.info( 'Fetching Hukamnama from SGPC...' )
 try {
-  const sikhnet = await getSikhnet()
-  const date = toZonedTime( sikhnet.date, 'Asia/Kolkata' ).toISOString().split( 'T' )[ 0 ]
+  const sgpc = await getSGPC()
+  const date = toZonedTime( sgpc.date, 'Asia/Kolkata' ).toISOString().split( 'T' )[ 0 ]
   if ( date !== today ) {
-    throw new Error( 'Sikhnet - Hukamnama not available for this day.' )
+    throw new Error( 'SGPC - Hukamnama not available for this day.' )
   }
   hukam = {
-    ...sikhnet,
+    ...sgpc,
     date,
   }
 } catch ( error ) {
   console.error( error )
 }
 
-// If Hukamnama is not available from SikhNet, try SGPC
+// If Hukamnama is not available from SGPC, try SikhNet
 if ( !hukam ) {
-  console.info( 'Fetching Hukamnama from SGPC (fallback)...' )
+  console.info( 'Fetching Hukamnama from SikhNet (fallback)...' )
   try {
-    const sgpc = await getSGPC()
-    const date = toZonedTime( sgpc.date, 'Asia/Kolkata' ).toISOString().split( 'T' )[ 0 ]
+    const sikhnet = await getSikhnet()
+    const date = toZonedTime( sikhnet.date, 'Asia/Kolkata' ).toISOString().split( 'T' )[ 0 ]
     if ( date !== today ) {
-      throw new Error( 'SGPC - Hukamnama not available for this day.' )
+      throw new Error( 'SikhNet - Hukamnama not available for this day.' )
     }
     hukam = {
-      ...sgpc,
+      ...sikhnet,
       date,
     }
   } catch ( error ) {
