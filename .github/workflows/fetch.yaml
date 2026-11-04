@@ -24,7 +24,7 @@ jobs:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
       with:
-        node-version: 'lts/*'
+        node-version: '24'
         registry-url: https://npm.pkg.github.com
         scope: '@gurbaninow'
     - run: npm ci
