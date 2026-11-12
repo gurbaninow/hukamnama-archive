@@ -3,21 +3,21 @@
   "version": "1.0.0",
   "description": "Fetch and store the latest Mukhvaak from Sri Darbar Sahib, Sri Amritsar.",
   "type": "module",
-  "directories": {
-    "lib": "lib"
-  },
   "scripts": {
-    "fetch": "node index.js",
-    "lint": "eslint .",
-    "prepare": "husky",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "lint-staged": {
-    "*.{js,jsx}": "eslint"
+    "fetch": "node index.ts",
+    "fetch:sgpc": "node index.ts --source sgpc",
+    "fetch:sikhnet": "node index.ts --source sikhnet",
+    "fetch:force": "node index.ts --force",
+    "typecheck": "tsc -p tsconfig.json",
+    "lint": "biome check .",
+    "format": "biome check --write .",
+    "test": "node --test test/*.test.ts",
+    "check": "npm run typecheck && npm run lint && npm test",
+    "prepare": "husky"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gurbaninow/hukamnama-archive.git"
+    "url": "https://github.com/gurbaninow/hukamnama-archive.git"
   },
   "author": "Sarabveer Singh <me@sarabveer.me>",
   "license": "MIT",
@@ -26,24 +26,20 @@
   },
   "homepage": "https://github.com/gurbaninow/hukamnama-archive#readme",
   "dependencies": {
-    "@gurbaninow/database": "^5.0.0-beta.2",
-    "app-root-path": "^3.1.0",
-    "date-fns": "^4.1.0",
+    "@gurbaninow/database": "^5.3.1",
+    "date-fns": "^4.4.0",
     "date-fns-tz": "^3.2.0",
-    "fast-xml-parser": "^5.5.10",
+    "fast-xml-parser": "^5.12.0",
     "gurmukhi-utils": "^3.2.2",
-    "jsdom": "^29.0.1"
+    "jsdom": "^31.0.0"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "^7.28.6",
-    "@commitlint/cli": "^20.5.0",
-    "@commitlint/config-conventional": "^20.5.0",
-    "eslint": "^8.57.1",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.32.0",
-    "eslint-plugin-jest": "^29.15.1",
-    "eslint-plugin-require-sort": "^1.3.0",
+    "@biomejs/biome": "^2.6.7",
+    "@commitlint/cli": "^21.2.4",
+    "@commitlint/config-conventional": "^21.2.4",
+    "@types/jsdom": "^30.0.0",
+    "@types/node": "^26.6.6",
     "husky": "^9.1.7",
-    "lint-staged": "^16.4.0"
+    "typescript": "~7.0.2"
   }
 }

@@ -1,10 +1,10 @@
-name: Fetch Latest Hukamnama 
+name: Fetch Latest Hukamnama
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 1 * * *'
-    - cron: '30 2 * * *'
-    - cron: '30 5 * * *'
+    - cron: "0 1 * * *"
+    - cron: "30 2 * * *"
+    - cron: "30 5 * * *"
 
 jobs:
   fetch-hukamnama:
@@ -13,28 +13,26 @@ jobs:
       contents: write
       packages: read
     env:
+      HUSKY: "0"
       NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-    - name: Debug trigger
-      run: |
-        echo "event_name=${{ github.event_name }}"
-        echo "schedule=${{ github.event.schedule }}"
-        date -u
-        date
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
-      with:
-        node-version: '24'
-        registry-url: https://npm.pkg.github.com
-        scope: '@gurbaninow'
-    - run: npm ci
-    - run: npm run fetch
-      name: Fetch Hukamnama
-    - id: date
-      uses: Kaven-Universe/github-action-current-date-time@v1
-      with:
-        format: "YYYY-MM-DD"
-    - uses: stefanzweifel/git-auto-commit-action@v6
-      with:
-        commit_message: "feat: ${{ steps.date.outputs.time }}"
-        commit_author: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
+      - name: Debug trigger
+        run: |
+          echo "event_name=${{ github.event_name }}"
+          echo "schedule=${{ github.event.schedule }}"
+          date -u
+          date
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: "lts/*"
+          registry-url: https://npm.pkg.github.com
+          scope: "@gurbaninow"
+      - run: npm ci
+      - name: Fetch Hukamnama
+        id: fetch
+        run: npm run fetch
+      - uses: stefanzweifel/git-auto-commit-action@v7.2.1
+        with:
+          commit_message: "feat: ${{ steps.fetch.outputs.date }}"
+          commit_author: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
